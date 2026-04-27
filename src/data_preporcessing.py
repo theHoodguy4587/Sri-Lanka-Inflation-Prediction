@@ -26,14 +26,14 @@ def clean_data(df):
 
     #drop missing target
 
-    df = df.dropna(subset=['Inflation (CPI %)'])
+    df = df.dropna(subset=['Inflation_CPI']).copy()
 
     #fill missing values for economic indicators
     cols =['GDP_Growth',
            'Inflation_GDP_Deflator',
            'GDP_per_Capita']
 
-    df[cols]= df.groupby('Country')[cols].ffill().bfill()
+    df.loc[:, cols] = df.groupby('Country')[cols].ffill().bfill()
 
     #drop remaning missing values
     df = df.dropna()
