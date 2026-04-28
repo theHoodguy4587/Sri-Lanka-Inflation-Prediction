@@ -170,7 +170,7 @@ st.markdown(
     """
     <div class="hero">
       <h1>Inflation Forecast Dashboard</h1>
-      <p>Interactively tune macro inputs and call your FastAPI model in one place.</p>
+            <p>Choose a country, adjust the inputs, and get a clear inflation forecast instantly.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -197,6 +197,20 @@ with left:
     st.subheader("Feature Inputs")
     st.caption("These controls are the inputs the user can understand directly. Lagged features are computed behind the scenes.")
 
+    show_tips = st.toggle("Show input tips", value=False)
+    if show_tips:
+        st.info(
+            "Adjust GDP metrics to test scenarios. The model uses the latest country history for lag features."
+        )
+        with st.expander("What do these inputs mean?"):
+            st.markdown(
+                """
+                - **GDP Growth**: Annual percentage change in GDP.
+                - **Inflation (GDP Deflator)**: Broad inflation measure based on GDP prices.
+                - **GDP per Capita**: GDP per person in current USD.
+                """
+            )
+
     with st.form("prediction_form"):
         c1, c2 = st.columns(2)
         with c1:
@@ -205,30 +219,34 @@ with left:
                 value=float(selected_row["GDP_Growth"]),
                 step=0.1,
                 format="%.2f",
+                help="Annual percent change in GDP. Use scenario values to explore outcomes.",
             )
             inflation_deflator = st.number_input(
                 "Inflation (GDP Deflator)",
                 value=float(selected_row["Inflation_GDP_Deflator"]),
                 step=0.1,
                 format="%.2f",
+                help="Inflation measured by the GDP deflator. Typically smoother than CPI.",
             )
             gdp_per_capita = st.number_input(
                 "GDP per Capita (USD)",
                 value=float(selected_row["GDP_per_Capita"]),
                 step=100.0,
                 format="%.2f",
+                help="Income per person in current USD.",
             )
         with c2:
             st.info(
                 "Lag features are derived automatically from the latest available observations for the chosen country."
             )
-            st.write(
-                {
-                    "Inflation Lag 1": lag_values["Inflation_Lag1"],
-                    "Inflation Lag 2": lag_values["Inflation_Lag2"],
-                    "GDP Growth Lag 1": lag_values["GDP_Growth_Lag1"],
-                }
-            )
+            with st.expander("View auto-generated lag features"):
+                st.write(
+                    {
+                        "Inflation Lag 1": lag_values["Inflation_Lag1"],
+                        "Inflation Lag 2": lag_values["Inflation_Lag2"],
+                        "GDP Growth Lag 1": lag_values["GDP_Growth_Lag1"],
+                    }
+                )
 
         submitted = st.form_submit_button("Forecast Inflation", use_container_width=True)
 
