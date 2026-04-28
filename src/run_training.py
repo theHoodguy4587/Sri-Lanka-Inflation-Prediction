@@ -13,13 +13,13 @@ df = prepare_features(df)
 
 train, val, test = split_data(df)
 
-X_train = train.drop(columns=['Inflation_CPI'])
+X_train = train.drop(columns=['Inflation_CPI', 'Year'])
 y_train = train['Inflation_CPI']
 
-X_val = val.drop(columns=['Inflation_CPI'])
+X_val = val.drop(columns=['Inflation_CPI', 'Year'])
 y_val = val['Inflation_CPI']
 
-X_test = test.drop(columns=['Inflation_CPI'])
+X_test = test.drop(columns=['Inflation_CPI', 'Year'])
 y_test = test['Inflation_CPI']
 
 model = train_model(X_train, y_train)
@@ -27,7 +27,7 @@ model = train_model(X_train, y_train)
 val_mae,_ = evaluate_model(model, X_val, y_val)
 test_mae,test_preds = evaluate_model(model,X_test,y_test)
 
-save_model(model, 'models/model_script.joblib')
+save_model(model, X_train.columns.tolist(), 'models/model_script.joblib')
 
 print("Validation MAE:", val_mae)
 print("Test MAE:", test_mae)

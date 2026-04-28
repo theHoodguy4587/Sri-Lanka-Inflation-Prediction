@@ -1,6 +1,6 @@
 import joblib
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 import pandas as pd
 
 def split_data(df):
@@ -17,11 +17,15 @@ def train_model(X_train, y_train):
 
 def evaluate_model(model, X, y):
     y_pred = model.predict(X)
-    mse = mean_squared_error(y, y_pred)
-    return mse,y_pred
+    mae = mean_absolute_error(y, y_pred)
+    return mae,y_pred
 
-def save_model(model, file_path):
-    joblib.dump(model, file_path)
+def save_model(model, columns, file_path):
+    model_bundle = {
+        'model': model,
+        'columns': columns
+    }
+    joblib.dump(model_bundle, file_path)
 
 def save_predictions(df,preds,path="data/predictions/predictions_script.csv"):
     results = df.copy()
