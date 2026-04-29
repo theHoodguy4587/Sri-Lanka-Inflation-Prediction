@@ -152,7 +152,7 @@ curl -X POST http://localhost:5000/predict \
 
 ### Dashboard
 
-The interactive dashboard can be used to visualize historical inflation data and see the model's predictions. Access it by navigating to `http://localhost:8501` in your web browser.
+The interactive dashboard can be used to visualize historical inflation data and see the model's predictions. Access it by navigating to `http://localhost:8504` in your web browser.
 
 ![Dashboard Screenshot](visuals/dashboard_screenshot.png)
 
