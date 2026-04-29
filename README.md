@@ -9,7 +9,7 @@ This project aims to predict inflation rates based on historical data. It includ
 This project is fully deployed and accessible online.
 
 *   **Frontend Dashboard:** Deployed on [Streamlit Cloud](https://streamlit.io/cloud).
-    *   **Live URL:** [**https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/**](https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/)
+    *   **Live URL:** [**https://sri-lanka-inflation-predictio-fxqrgkwkpklyb3iwacaf8e.streamlit.app/**](https://sri-lanka-inflation-predictio-fxqrgkwkpklyb3iwacaf8e.streamlit.app//)
 *   **Backend API:** Deployed on [Render](https://render.com).
     *   **Live URL:** [**https://global-inflation-prediction-api.onrender.com/predict**](https://global-inflation-prediction-api.onrender.com/predict)
 
