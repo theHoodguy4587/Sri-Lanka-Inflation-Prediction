@@ -132,14 +132,18 @@ def load_country_data() -> pd.DataFrame:
 
 @st.cache_data
 def get_country_defaults(df: pd.DataFrame) -> pd.DataFrame:
-    latest = df.sort_values(["Country", "Year"]).groupby("Country", as_index=False).tail(1)
-    latest = latest[[
-        "Country",
-        "GDP_Growth",
-        "Inflation_GDP_Deflator",
-        "GDP_per_Capita",
-        "Inflation_CPI",
-    ]].copy()
+    df_sorted = df.sort_values(["Country", "Year"])
+
+    def last_valid(series: pd.Series) -> float:
+        non_null = series.dropna()
+        return non_null.iloc[-1] if not non_null.empty else float("nan")
+
+    latest = df_sorted.groupby("Country", as_index=False).agg(
+        GDP_Growth=("GDP_Growth", last_valid),
+        Inflation_GDP_Deflator=("Inflation_GDP_Deflator", last_valid),
+        GDP_per_Capita=("GDP_per_Capita", last_valid),
+        Inflation_CPI=("Inflation_CPI", last_valid),
+    )
     latest = latest.rename(columns={"Inflation_CPI": "Last_Observed_Inflation"})
     return latest.sort_values("Country")
 

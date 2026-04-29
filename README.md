@@ -4,11 +4,14 @@
 
 This project aims to predict inflation rates based on historical data. It includes a comprehensive pipeline for data processing, feature engineering, model training with hyperparameter tuning, a prediction API, and an interactive dashboard for visualizing the results.
 
-## Live Demo
+## Live Demo & Deployment
 
-The deployed Streamlit dashboard is live and can be accessed here:
+This project is fully deployed and accessible online.
 
-[**Live Dashboard**](https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/)
+*   **Frontend Dashboard:** Deployed on [Streamlit Cloud](https://streamlit.io/cloud).
+    *   **Live URL:** [**https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/**](https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/)
+*   **Backend API:** Deployed on [Render](https://render.com).
+    *   **Live URL:** [**https://global-inflation-prediction-api.onrender.com/predict**](https://global-inflation-prediction-api.onrender.com/predict)
 
 ## Project Structure
 
