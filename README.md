@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This project aims to predict inflation rates based on historical data. It includes components for data processing, model training, a prediction API, and an interactive dashboard for visualizing the results.
+This project aims to predict inflation rates based on historical data. It includes a comprehensive pipeline for data processing, feature engineering, model training with hyperparameter tuning, a prediction API, and an interactive dashboard for visualizing the results.
 
 ## Project Structure
 
-The project is organized into the following directories:
+![Project Architecture](visuals/project_architecture.png)
 
 ```
 ├── api/
@@ -25,15 +25,21 @@ The project is organized into the following directories:
 │   ├── Dockerfile.api
 │   └── Dockerfile.dashboard
 ├── models/
+│   ├── model_notebook.pkl
 │   └── model_script.joblib   # Trained machine learning model
 ├── Notebooks/
-│   └── inflation.ipynb       # Jupyter Notebook for exploratory data analysis
+│   └── inflation.ipynb       # Jupyter Notebook for exploratory data analysis and model development
 ├── src/
 │   ├── data_preprocessing.py
 │   ├── feature_engineering.py
 │   ├── predict.py
 │   ├── run_training.py
 │   └── train.py
+├── visuals/                  # Directory for project visuals
+│   ├── project_architecture.png
+│   ├── actual_vs_predicted.png
+│   ├── feature_importance.png
+│   └── dashboard_screenshot.png
 ├── .gitignore
 ├── docker-compose.yml
 ├── README.md
@@ -45,24 +51,53 @@ The project is organized into the following directories:
 *   **`api/`**: Contains the web API to serve the inflation prediction model.
 *   **`dashboard/`**: Houses the interactive dashboard for data and prediction visualization.
 *   **`data/`**: Stores raw, processed, and predicted data.
-*   **`models/`**: Contains the serialized, trained machine learning model.
-*   **`Notebooks/`**: Jupyter Notebooks for data exploration and experimentation.
+*   **`models/`**: Contains the serialized, trained machine learning models.
+*   **`Notebooks/`**: A Jupyter Notebook detailing the entire data science workflow from exploration to model evaluation.
 *   **`src/`**: Source code for data processing, feature engineering, model training, and prediction logic.
 *   **`docker/`**: Dockerfiles for building the API and dashboard services.
 *   **`docker-compose.yml`**: Defines and configures the multi-container Docker application.
 *   **`requirements.txt`**: Lists the Python dependencies for the project.
 
-## Features
+## Data Science Workflow
 
-*   Data preprocessing and feature engineering pipelines.
-*   Train a machine learning model to predict inflation.
-*   A RESTful API to get inflation predictions.
-*   An interactive dashboard to visualize inflation data and model predictions.
-*   Containerized application using Docker for easy deployment and scalability.
+The core of this project is a detailed data science workflow, which is fully documented in the `Notebooks/inflation.ipynb` notebook. The key stages are:
 
-## Dataset
+### 1. Data Preprocessing
 
-The dataset used for this project is sourced from the World Bank. The raw data can be found in `data/raw/world_bank_data_2025.csv`. The processed data used for model training is located in `data/processed/inflation_data.csv`.
+*   **Data Cleaning**: Handled missing values by using forward and backward fill techniques, ensuring data integrity.
+*   **Column Selection**: Selected relevant features for the model to reduce noise and improve performance.
+
+### 2. Feature Engineering
+
+*   **Lag Features**: Created time-lagged features for inflation and GDP growth to capture temporal dependencies.
+*   **Categorical Encoding**: Applied one-hot encoding to the `Country` feature to make it suitable for machine learning models.
+
+### 3. Model Training and Selection
+
+A pipeline of several regression models was trained and evaluated to find the best performer.
+
+*   **Time-Aware Splitting**: The data was split into training, validation, and test sets based on the year to prevent data leakage and simulate a real-world forecasting scenario.
+*   **Models Evaluated**:
+    *   Linear Regression
+    *   Ridge Regression
+    *   Random Forest Regressor
+    *   Gradient Boosting Regressor
+    *   XGBoost Regressor
+*   **Best Model**: The Random Forest Regressor was selected as the best-performing model based on its high R² score and low RMSE on the validation set.
+
+### 4. Hyperparameter Tuning
+
+The selected Random Forest model was further optimized through hyperparameter tuning.
+
+*   **Grid Search**: A grid search was performed to find the optimal combination of hyperparameters, such as the number of estimators and the maximum depth of the trees.
+*   **Final Model**: The tuned Random Forest model demonstrated the best performance, which was then used for the final predictions.
+
+### 5. Model Evaluation
+
+The final model was evaluated on the test set to assess its performance on unseen data.
+
+![Actual vs. Predicted Inflation](visuals/actual_vs_predicted.png)
+![Feature Importance](visuals/feature_importance.png)
 
 ## Getting Started
 
@@ -110,13 +145,11 @@ curl -X POST http://localhost:5000/predict \
 
 The interactive dashboard can be used to visualize historical inflation data and see the model's predictions. Access it by navigating to `http://localhost:8501` in your web browser.
 
-## Model
-
-The model used for this project is a `[Specify Model Type, e.g., Gradient Boosting Regressor]` trained on historical inflation data. The trained model is saved in `models/model_script.joblib`. The training process can be reproduced by running the `src/run_training.py` script.
+![Dashboard Screenshot](visuals/dashboard_screenshot.png)
 
 ## Visuals
 
-*(Space reserved for project visuals, such as architecture diagrams, dashboard screenshots, or result plots.)*
+*(Space reserved for project visuals, such as the prediction performance graph, dashboard screenshots, or result plots.)*
 
 <!--
 Example of how to add an image:
