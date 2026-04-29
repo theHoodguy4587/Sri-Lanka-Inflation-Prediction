@@ -9,7 +9,7 @@ import streamlit as st
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_PATH = BASE_DIR / "data" / "raw" / "world_bank_data_2025.csv"
-DEFAULT_API_URL = "http://127.0.0.1:8000/predict"
+DEFAULT_API_URL = "http://api:8000/predict"
 
 
 st.set_page_config(
@@ -178,7 +178,7 @@ st.markdown(
 
 with st.sidebar:
     st.header("Prediction Controls")
-    api_url = st.text_input("API endpoint", value=os.getenv("INFLATION_API_URL", DEFAULT_API_URL))
+    api_url = st.text_input("API endpoint", value=os.getenv("INFLATION_API_URL", "http://127.0.0.1:8000/predict"))
     selected_country = st.selectbox("Country", country_options, index=0)
     st.caption("Only user-facing macro inputs are shown. Lag features are generated automatically from the selected country's history.")
 

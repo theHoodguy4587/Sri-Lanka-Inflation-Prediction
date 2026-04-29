@@ -4,6 +4,12 @@
 
 This project aims to predict inflation rates based on historical data. It includes a comprehensive pipeline for data processing, feature engineering, model training with hyperparameter tuning, a prediction API, and an interactive dashboard for visualizing the results.
 
+## Live Demo
+
+The deployed Streamlit dashboard is live and can be accessed here:
+
+[**Live Dashboard**](https://thehoodguy4587-sri-lanka-inflation-predicti-dashboardapp-ofszf3.streamlit.app/)
+
 ## Project Structure
 
 ![Project Architecture](visuals/project_architecture.png)
@@ -97,7 +103,7 @@ The selected Random Forest model was further optimized through hyperparameter tu
 The final model was evaluated on the test set to assess its performance on unseen data.
 
 ![Actual vs. Predicted Inflation](visuals/actual_vs_predicted.png)
-![Feature Importance](visuals/feature_importance.png)
+
 
 ## Getting Started
 
