@@ -156,17 +156,6 @@ The interactive dashboard can be used to visualize historical inflation data and
 
 ![Dashboard Screenshot](visuals/dashboard_screenshot.png)
 
-## Visuals
-
-*(Space reserved for project visuals, such as the prediction performance graph, dashboard screenshots, or result plots.)*
-
-<!--
-Example of how to add an image:
-<p align="center">
-  <img src="path/to/your/visual.png" alt="Project Visual" width="700"/>
-</p>
--->
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request.
